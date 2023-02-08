@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <title>Взятие номера</title>
+  <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+
+<!--блок навигации-->
+<div th:insert="blocks/navigation"></div>
+
+
+
+<div align="center">
+  <br>
+  <h1>Список розыскных дел</h1>
+  <br>
+</div>
+
+
+<div align="center">
+  <a href="/tableRD/download" class="btn btn-primary">Документы для заполнения</a>
+</div>
+
+
+<div class="container py-5 h-100">
+  <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: rgba(0,108,248,0.11);">
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <div align="center">
+            <form method="post" action="filter">
+              <input type="text" name="filter" placeholder="поиск по № дела" class="form-control-sm">
+              <button type="submit" class="btn btn-outline-dark my-2">Найти</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div align="center">
+            <form method="post" action="filterCh">
+              <select type="text" name="filterCh">
+                <option text="есть">все</option>
+                <option text="есть">есть</option>
+                <option text="отсутствуют">отсутствуют</option>
+              </select>
+              <button type="submit" class="btn btn-outline-success my-2">Найти</button>
+            </form>
+          </div>
+        </div>
+          <div class="col-sm">
+              <div class="d-grid gap-2">
+              <a href="/tableRD/add_form_table_rd" class="btn btn-primary my-2" >Взять номер розыскного дела</a>
+              </div>
+          </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+
+
+
+<div class="container mt-5">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">№ дела</th>
+      <th scope="col">✅</th>
+      <th scope="col">ФИО сотрудника</th>
+      <th scope="col">ФИО розыскиваемого</th>
+      <th scope="col">Дата создания</th>
+      <th scope="col">Дата изменения</th>
+    </tr>
+    </thead>
+    <tr th:each="element : ${numbersSL}">
+      <td th:text="${element.numberSL}"></td>
+      <td th:text="${element.readyDocks}"></td>
+      <td th:text="${element.operName}"></td>
+      <td th:text="${element.rozName}"></td>
+      <td th:text="${element.dataSL}"></td>
+      <td th:text="${element.dataIzm}"></td>
+      <td>
+      <a th:href="'/tableRD/' + ${element.id}" class="btn btn-outline-dark">подробнее</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

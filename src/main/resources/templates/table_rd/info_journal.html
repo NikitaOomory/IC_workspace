@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Информация по РД</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+
+<div th:insert="blocks/navigation"></div>
+
+<br>
+<div align="center">
+    <h1 class="fw-light">Информация о записи</h1>
+</div>
+
+<div class="container py-5 h-100">
+    <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: rgba(0,108,248,0.11);">
+        <div th:each="el :${post}" class="container m-md-3">
+            <h5>Номер дела: <span th:text="${el.numberSL}"/></h5>
+            <h5>ФИО сотрудника: <span th:text="${el.operName}"/></h5>
+            <h5>Телефон для связи: <span th:text="${el.phoneNumberCreator}"/></h5>
+            <h5>ФИО разыскиваемого: <span th:text="${el.rozName}"/></h5>
+            <h5>Место заведения РД: <span th:text="${geoloc}"/></h5>
+            <h5>Категория розыскного дела: <span th:text="${cat}"/></h5>
+            <h5>Дата создания записи: <span th:text="${el.dataSL}"/></h5>
+            <h5>Дата изменения записи: <span th:text="${el.dataIzm}"/></h5>
+            <h5>Отметка о сдаче документов: <span th:text="${el.readyDocks}"/></h5>
+
+            <div>
+                <form method="post" class="m-md-3">
+                    <select typeof="text" name="checkedDocks">
+                        <option th:each="ch : ${check}" th:text="${ch}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Обновить статус</button>
+                </form>
+            </div>
+
+            <a th:href="'/tableRD/' + ${el.id} + '/edit'" class="btn btn-warning m-md-3">Редактировать</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

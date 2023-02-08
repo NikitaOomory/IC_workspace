@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Взятие номера</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+
+<div th:insert="blocks/navigation"></div>
+
+<br>
+<div align="center">
+    <h1>Добавление номера дела</h1>
+</div>
+
+
+<div class="container mt-5">
+    <form action="/tableRD/add_form_table_rd" method="post">
+        <!--указываем страницу где будет обрабатываться форма
+        метод передачи данных-->
+        <input type="text" name="oper_name" placeholder="Введите ФИО оперативного сотрудника" class="form-control"><br>
+        <input type="text" name="phone_oper" placeholder="Введите номер телефона для связи" required
+               class="form-control"><br>
+        <input type="text" name="roz_name" placeholder="Введите ФИО розыскиваемого лица" class="form-control"><br>
+        <select typeof="text" name="number_category" class=input-group>
+            <option th:each="elc : ${resCat}" th:text="${elc}"></option>
+        </select><br><br>
+        Тип РД <select typeof="text" name="typeJ">
+        <option>2 - розыск</option>
+        <option>1 - сигнальная система</option>
+        <option>5 - из ОПД в РД</option>
+    </select><br><br>
+        <select name="area">
+            <option th:each="ar : ${area}" th:text="${ar}" name="area"></option>
+        </select><br><br>
+        <br>
+        <button type="submit" class="btn btn-success">Добавить запись</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Авторизация</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body style="background-color: rgba(0,108,248,0.11);">
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <form th:align="center" th:action="@{/login}" method="post">
+
+
+                            <div th:if="${param.error}">
+                                <h3>Неправильное имя пользователя или пароль.</h3>
+                            </div>
+                            <div th:if="${param.logout}">
+                                <h3>Авторизация</h3>
+                            </div>
+
+                            <br>
+
+                            <div align="center"><label> Имя пользователя: </label></div>
+                            <input type="text" name="username" class="form-control form-control-lg"/>
+
+                            <div align="center"><label> Пароль: </label></div>
+                            <input type="password" name="password" class="form-control form-control-lg"/>
+
+                            <br>
+
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Войти</button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
+
+
+

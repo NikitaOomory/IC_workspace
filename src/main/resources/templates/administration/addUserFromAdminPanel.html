@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Добавление пользователя</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+
+<div th:insert="blocks/navigation"></div>
+
+<br>
+
+<div align="center">
+    <h1>Добавление пользователя</h1>
+</div>
+
+<div class="container mt-5">
+    <form method="post" >
+        <div>
+            Логин<input type="text" name="username" placeholder="Введите новый логин" class="form-control"><br>
+            Пароль<input type="text" name="password" placeholder="Введите новый пароль" class="form-control"><br>
+            Активность
+            <select name="role">
+                <option th:each="u : ${roles}"  th:text="${u}" name="role"></option>
+            </select>
+            <br>
+            <br>
+            Имя<input type="text"  name="nameEmployee" placeholder="Введите новое имя" class="form-control"><br>
+            Фамилия<input type="text"  name="lastNameEmployee" placeholder="Введите новую фамилию" class="form-control"><br>
+            Отчество<input type="text" name="patronymicEmployee" placeholder="Введите новое отчество" class="form-control"><br>
+            Район
+            <select name="area">
+                <option th:each="ar : ${area}" th:text="${ar}" name="area"></option>
+            </select>
+            <br>
+            <br>
+            Подразделение<input type="text"  name="divisionEmployee" placeholder="Введите новое подразделение" class="form-control"><br>
+            Должность<input type="text"  name="position" placeholder="Введите новую должность" class="form-control"><br>
+            Номер телефона<input type="text"  name="phoneNumberEmployee" placeholder="Введите новый телефон" class="form-control"><br>
+            Адрес эл. почты<input type="text"  name="emailEmployee" placeholder="Введите новую эл. почту" class="form-control"><br>
+
+            <form>
+                после редактирования УЗ автоматически становится не активной <button type="submit" class="btn btn-primary">Создать пользователя</button>
+            </form>
+        </div>
+    </form>
+</div>
+</body>
+</html>

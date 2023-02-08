@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>IC workspace</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+
+<body>
+
+<!--Навигационный блок-->
+<header th:insert="blocks/navigation"></header>
+
+<br>
+<br>
+<!--Описательная часть-->
+<div align="center" class="container py-3">
+    <h1 class="fw-light">BETA Version IC_workspace</h1>
+    <p class="lead text-muted">Платформа сервисов информационного центра</p>
+    <a href="/reg">Зарегистрироваться</a>
+</div>
+
+<!--Блок описания сервисов и навигации по ним-->
+<div class="container py-3">
+
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Таблица РД</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">v.1.0.0</h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Сервис для розыскных подразделений,</li>
+                        <li>позволяющий зарегистрировать</li>
+                        <li>номер розыскного дела</li>
+                        <li>и получить необходимую документацию.</li>
+                    </ul>
+                    <a type="button" href="/tableRD" class="w-100 btn btn-lg btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">СУЗ</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">v.0.0.1</h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Сервис автоматического заполнения</li>
+                            <li>документов и имеющий возможность</li>
+                            <li>автоматизированного поиска объектов</li>
+                            <li>в базах данных определённого перечня.</li>
+                        </ul>
+                        <a type="button" href="#" class="w-100 btn btn-lg btn-outline-primary">Перейти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Сверка</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">v.0.0.1</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>Сервис для сверок документов</li>
+                                <li>между собой или с базой данных</li>
+                                <li>в автоматическом режиме по</li>
+                                <li>заданным параметрам пользователя.</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Перейти</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

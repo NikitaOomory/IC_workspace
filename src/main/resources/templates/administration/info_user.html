@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Информация о пользователе</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+
+<div th:insert="blocks/navigation"></div>
+
+<br>
+
+<h3 align="center">Информация о пользователе</h3>
+
+<div class="container py-5 h-100">
+    <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: rgba(0,108,248,0.11);">
+        <div class="container m-md-3">
+            <h5>Логин: <span th:text="${user.username}"/></h5>
+            <h5>Пароль: <span th:text="${user.password}"/></h5>
+            <h5>ФИО: <span th:text="${user.getFullName()}"/></h5>
+            <h5>Район: <span th:text="${user.area}"/></h5>
+            <h5>Подразделение: <span th:text="${user.getDivisionEmployee()}"/></h5>
+            <h5>Должность: <span th:text="${user.position}"/></h5>
+            <h5>Телефон: <span th:text="${user.phoneNumberEmployee}"/></h5>
+            <h5>Адрес эл. почты: <span th:text="${user.emailEmployee}"/></h5>
+            <h5>Активность: <span th:text="${user.active}"/></h5>
+            <h5>Дата создания УЗ: <span th:text="${user.createDate}"/></h5>
+            <h5>Дата последнего редактирования УЗ: <span th:text="${user.editedDate}"/></h5>
+            <a th:href="'/adm/edit_user/' + ${user.id}" class="btn btn-outline-danger">Редактировать пользователя</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

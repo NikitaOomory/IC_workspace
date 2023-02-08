@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <title>Взятие номера</title>
+  <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+<body>
+
+<div th:insert="blocks/navigation"></div>
+
+<br>
+<div align="center">
+  <h1>Редактирование дела</h1>
+</div>
+
+<div class="container mt-5">
+  <form method="post">
+    <!--указываем страницу где будет обрабатываться форма
+    метод передачи данных-->
+    <div th:each="el : ${post}">
+      <input type="text" th:value="${el.operName}" name="oper_name" placeholder="Введите ФИО оперативного сотрудника" class="form-control"><br>
+      <input type="text" th:value="${el.phoneNumberCreator}" name="phoneNumber" placeholder="Введите телефон для связи" class="form-control"><br>
+      <input type="text" th:value="${el.rozName}" name="roz_name" placeholder="Введите ФИО розыскиваемого лица" class="form-control"><br>
+      <select typeof="text" name="number_cat" class=input-group>
+        <option th:each="elc : ${resCat}"  th:text="${elc}"></option>
+      </select><br>
+      <br>
+      <select typeof="text" name="number_geo" class=>
+        <option th:each="el : ${res}" th:text="${el}"></option>
+      </select><br>
+      <!--TODO: сделать показ выбранного элемента категории и гео, а не просто списка селект начиная с 1-->
+      <br>
+      Тип РД <select typeof="text" name="typeJ">
+      <option>2 - розыск</option>
+      <option>1 - сигнальная система</option>
+      <option>5 - из ОПД в РД</option>
+    </select>
+      <form method="post">
+        <button type="submit" class="btn btn-primary">Обновить запись</button>
+      </form>
+
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

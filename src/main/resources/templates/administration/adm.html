@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Администрирование</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+
+<header th:insert="blocks/navigation"></header>
+
+<br>
+
+<h5 align="center">Настройки сервиса "Таблица РД"</h5>
+
+<form method="post" action="/adm/s">
+    <div class="container mt-5">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Настройка</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Категория настройки</th>
+            </tr>
+            </thead>
+            <tr>
+                <td th:text="${setting.aboutSettings}"></td>
+                <td th:text="${activeSet}"></td>
+                <td th:text="${setting.settingsCategory}"></td>
+                <td>
+                    <button type="submit" href="/adm/s" class="btn btn-outline-dark">изменить статус</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<br>
+<br>
+<hr>
+<br>
+
+<h5 align="center">Управление пользователями</h5>
+
+<br>
+
+<div align="center">
+    <a href="/adm/add_user/" class="btn btn-success">Добавить пользователя</a>
+</div>
+
+<div class="container mt-5">
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th scope="col">Логин</th>
+            <th scope="col">Имя пользователя</th>
+            <th scope="col">Активация аккаунта</th>
+            <th scope="col">Тип</th>
+        </tr>
+        </thead>
+
+        <form method="post" action="/adm/a">
+            <tr th:each="element : ${users}">
+                <td th:text="${element.username}"></td>
+                <td th:text="${element.getFullName()}"></td>
+                <td th:text="${element.active}"></td>
+                <td th:text="${element.getRoles()}"></td>
+                <td>
+                    <a type="submit" th:href="'/adm/edit_user/act/' + ${element.id}" class="btn btn-outline-dark">изменить активность</a>
+                </td>
+                <td>
+                    <a type="submit" th:href="'/adm/info_user/' + ${element.id}" class="btn btn-outline-dark">подробнее</a>
+                </td>
+            </tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>
