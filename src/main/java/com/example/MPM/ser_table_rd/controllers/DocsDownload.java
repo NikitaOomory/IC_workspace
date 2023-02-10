@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 @Controller
 @RequestMapping("/tableRD/download")
 public class DocsDownload {
+
     @Autowired
     MyPagePath path = new MyPagePath();
 
@@ -29,16 +30,13 @@ public class DocsDownload {
     }
 
     @GetMapping("/1")
-    public void getFile(HttpServletResponse response) throws IOException {
+    public void downloadFileFromServer(HttpServletResponse response) throws IOException {
         File file = new File("text.txt");
         if (file.exists()){
             response.setHeader("Content-disposition", "attachment;filename=" + file.getName());
             response.setContentType("application/vnd.ms-excel");
-
                 Files.copy(file.toPath(), response.getOutputStream());
                 response.getOutputStream().flush();
-
-            //TODO: изучить и отредактировать!!!
         }
     }
 }

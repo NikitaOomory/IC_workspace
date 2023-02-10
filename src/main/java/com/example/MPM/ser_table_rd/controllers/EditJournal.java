@@ -1,6 +1,6 @@
 package com.example.MPM.ser_table_rd.controllers;
 
-import com.example.MPM.contract.AdapterCat;
+import com.example.MPM.contract.AdapterCategory;
 import com.example.MPM.contract.AdapterGeo;
 import com.example.MPM.contract.MyPagePath;
 import com.example.MPM.repo.JournalSLRepo;
@@ -40,10 +40,10 @@ public class EditJournal {
         JournalSL oldJournalSL = journalSLRepository.findById(id).get();
 
         //преобразовываем числовые значения из БД о районе и категории в текстовый вид с помощью адаптера-словаря
-        AdapterCat adapterCat = new AdapterCat();
-        ArrayList<String> cat = (ArrayList<String>) adapterCat.getCatlist();
+        AdapterCategory adapterCat = new AdapterCategory();
+        ArrayList<String> cat = (ArrayList<String>) adapterCat.getArrayListCategorys();
         AdapterGeo adapterGeo = new AdapterGeo();
-        ArrayList<String> geo = (ArrayList<String>) adapterGeo.getGeoList();
+        ArrayList<String> geo = (ArrayList<String>) adapterGeo.getGeoArrayList();
 
         //передаём значения в форму
         model.addAttribute("post", oldJournalSL);
@@ -66,10 +66,10 @@ public class EditJournal {
         //устанавливаем изменения из формы
         jurnalSL.setOperName(oper_name);
         jurnalSL.setRozName(roz_name);
-        AdapterCat adapterCat = new AdapterCat();
+        AdapterCategory adapterCat = new AdapterCategory();
         AdapterGeo adapterGeo = new AdapterGeo();
-        jurnalSL.setNumberCat(adapterCat.catInteger(number_cat));
-        jurnalSL.setNumberGeo(adapterGeo.geoInteger(number_geo));
+        jurnalSL.setNumberCat(adapterCat.getIntegerCategoryFromString(number_cat));
+        jurnalSL.setNumberGeo(adapterGeo.getIntegerFromStringGeo(number_geo));
         jurnalSL.setPhoneNumberCreator(phoneNumber);
 
         NumberJournalSL numberJournalSL = new NumberJournalSL();
@@ -83,7 +83,7 @@ public class EditJournal {
         } else {
             numberJournalSL.setTypeJournal("2");
         }
-        numberJournalSL.setCategory(adapterCat.catInteger(number_cat).toString());
+        numberJournalSL.setCategory(adapterCat.getIntegerCategoryFromString(number_cat).toString());
         numberJournalSL.setYear(jurnalSL.getNumberSL().substring(0,2));
         jurnalSL.setNumberSL(numberJournalSL.getFinalNumber());
 

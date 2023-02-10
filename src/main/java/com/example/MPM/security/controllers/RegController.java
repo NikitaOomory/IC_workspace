@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 
 @Controller
 public class RegController {
@@ -33,7 +32,7 @@ public class RegController {
             add(Role.USER.toString());
         }};
         AdapterGeo adapterGeo = new AdapterGeo();
-        Iterable<String> areas = adapterGeo.getGeoList();
+        Iterable<String> areas = adapterGeo.getGeoArrayList();
 
         model.addAttribute("areas", areas);
         model.addAttribute("roles", roles);

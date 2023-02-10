@@ -1,6 +1,6 @@
 package com.example.MPM.ser_table_rd.controllers;
 
-import com.example.MPM.contract.AdapterCat;
+import com.example.MPM.contract.AdapterCategory;
 import com.example.MPM.contract.AdapterGeo;
 import com.example.MPM.contract.MyPagePath;
 import com.example.MPM.repo.JournalSLRepo;
@@ -34,7 +34,7 @@ public class AddJournal {
     @Autowired
     private SettingRepo settingRepo;
     @Autowired
-    private UserUtils userUtils;
+    private UserUtils enteredUser;
     @Autowired
     UserRepo userRepo;
     @Autowired
@@ -43,31 +43,34 @@ public class AddJournal {
     MyPagePath path = new MyPagePath();
 
     @GetMapping("/add_form_table_rd")
-    public String addFormTableRD(Model model){
-
-        AdminSetting adminSetting = settingRepo.findBySettingName("User ability to add a journal");
-        userUtils = new UserUtils(userRepo);
-        boolean a = userUtils.getAuthUserRole().equals("[ADMIN]");
-
-        if(adminSetting.getSettingStatus() == true || a==true){
+    public String getPageAddFormTableRDIfActiveButtonOrYouAdmin(Model model){
+        if(checkSettingsAddButton()){
             AdapterGeo adapterGeo = new AdapterGeo();
-            ArrayList<String> areas = (ArrayList<String>) adapterGeo.getGeoList();
-            model.addAttribute("area", areas);
-
-            AdapterCat adapterCat = new AdapterCat();
-            ArrayList <String> resCat = (ArrayList<String>) adapterCat.getCatlist();
-            model.addAttribute("resCat",resCat);
-
+            model.addAttribute("area", (ArrayList<String>) adapterGeo.getGeoArrayList());
+            AdapterCategory adapterCat = new AdapterCategory();
+            model.addAttribute("resCat",(ArrayList<String>) adapterCat.getArrayListCategorys());
             return path.ADD_JOURNAL;
         }else {
             return "redirect:/tableRD";
         }
     }
 
+    public boolean checkSettingsAddButton(){
+        AdminSetting adminSettingAddButton = settingRepo.findBySettingName("User ability to add a journal");
+        enteredUser = new UserUtils(userRepo);
+        //администратор при любой настройке должен обладать полным функционалом и доступом
+        boolean isAdmin = enteredUser.getAuthUserRole().equals("[ADMIN]");
+        if(adminSettingAddButton.getSettingStatus() || isAdmin){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
 
     @PostMapping("/add_form_table_rd")
-    public String addFormButton(
+    public String addJournalSLInDB(
             @AuthenticationPrincipal User user,
             @RequestParam String oper_name,
             @RequestParam String roz_name,
@@ -78,76 +81,40 @@ public class AddJournal {
             Model model){
         //---------------------------------------------------------------------------------------
         //ФОРМИРОВАНИЕ НОМЕРА ДЕЛА
-        numberJournalSL = new NumberJournalSL();
-
-        //получение года заведения дела для составления номера
-        numberJournalSL.setYear(Year.now().format(DateTimeFormatter.ofPattern("uu")).toString());
-
-        //установка типа розыскного дела для отображения в полном номере РД
-        if(typeJ.equals("1 - сигнальная система")){
-            numberJournalSL.setTypeJournal("1");
-        } else if (typeJ.equals("5 - из ОПД в РД")) {
-            numberJournalSL.setTypeJournal("5");
-        } else if (typeJ.equals("4 - труп")) {
-            numberJournalSL.setTypeJournal("4");
-        } else {
-            numberJournalSL.setTypeJournal("2");
-        }
-
-        //формирование короткого номера розыскного дела
-        Long last = journalSLRepository.count();
-        String numberShort = (Math.toIntExact(last) + 1) + "";
-        if(numberShort.length() == 1){
-            numberShort = "00000" + numberShort;
-        }else if(numberShort.length() == 2){
-            numberShort = "0000" + numberShort;
-        }else if(numberShort.length() == 3){
-            numberShort = "000" + numberShort;
-        }else if(numberShort.length() == 4){
-            numberShort = "00" + numberShort;
-        } else if(numberShort.length() == 5){
-            numberShort = "0" + numberShort;
-        } else if(numberShort.length() == 6){
-            numberShort = numberShort;
-        }
-        numberJournalSL.setShortNumber(numberShort);
-
-        //установка категории дела для оторажения в номере
-        //получаем значение категории дела для БД с помощью адаптера
-        AdapterCat adapterCat = new AdapterCat();
-        Integer cat = adapterCat.catInteger(number_category);
-        numberJournalSL.setCategory(adapterCat.catInteger(number_category).toString());
-
-        //получаем полный номер РД
+        numberJournalSL = new NumberJournalSL(typeJ,number_category,journalSLRepository);
         String fullNumber = numberJournalSL.getFinalNumber();
-        //---------------------------------------------------------------------------------------
-
 
         //получаем значение района для БД с помощью адаптера
         AdapterGeo adapterGeo = new AdapterGeo();
-        Integer geo = adapterGeo.geoInteger(area);
+        Integer geo = adapterGeo.getIntegerFromStringGeo(area);
+
+        AdapterCategory adapterCategory = new AdapterCategory();
+        Integer cat = adapterCategory.getIntegerCategoryFromString(number_category);
+
+        String shortNumber = numberJournalSL.getShortNumber();
 
         //получение даты создания записи
         String getDateSL = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(Calendar.getInstance().getTime());
 
         //создаём новый экземпляр класса и заполняем его данными полученными из формы, после чего сохраняем в БД
-        JournalSL jurnalSL = new JournalSL(fullNumber, oper_name, roz_name, cat, geo, getDateSL, numberShort, phone_oper);
+        JournalSL journalSL = new JournalSL(fullNumber, oper_name, roz_name, cat, geo, getDateSL, shortNumber, phone_oper);
+
 
         //проверка на наличие пустых номеров, в случае если такие имеются, заполняются в первую очередь они
-        JournalSL priority = journalSLRepository.findByOperName("");
+        JournalSL priorityNumberSL = journalSLRepository.findByOperName("");
 
-        if (priority == null){
-            journalSLRepository.save(jurnalSL);
-        }else if (priority!= null) {
-            priority.setOperName(oper_name);
-            priority.setRozName(roz_name);
-            priority.setNumberCat(cat);
-            priority.setNumberGeo(geo);
-            priority.setDataSL(getDateSL);
-            priority.setShortNumber(numberShort);
-            priority.setPhoneNumberCreator(phone_oper);
-            priority.setReadyDocks("X");
-            journalSLRepository.save(priority);
+        if (priorityNumberSL == null){
+            journalSLRepository.save(journalSL);
+        }else if (priorityNumberSL!= null) {
+            priorityNumberSL.setOperName(oper_name);
+            priorityNumberSL.setRozName(roz_name);
+            priorityNumberSL.setNumberCat(cat);
+            priorityNumberSL.setNumberGeo(geo);
+            priorityNumberSL.setDataSL(getDateSL);
+            priorityNumberSL.setPhoneNumberCreator(phone_oper);
+            priorityNumberSL.setReadyDocks("X");
+            priorityNumberSL.setDataIzm("внесено в свободный номер от которого отказались");
+            journalSLRepository.save(priorityNumberSL);
         }
 
         return "redirect:/tableRD";
