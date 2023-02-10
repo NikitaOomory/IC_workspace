@@ -33,6 +33,8 @@ public class MpmApplication implements WebMvcConfigurer{
 
 //@SpringBootApplication
 //public class MpmApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
+//
+//	MyPagePath path = new MyPagePath(); //объявление словаря путей HTML страниц
 //	public MpmApplication() {
 //	}
 //
@@ -42,8 +44,8 @@ public class MpmApplication implements WebMvcConfigurer{
 //
 //	@Override
 //	public void addViewControllers(ViewControllerRegistry registry) {
-//		registry.addViewController("/").setViewName("index");
-//		registry.addViewController("/login").setViewName("login");
+//		registry.addViewController("/").setViewName(path.MAIN_PAGE);
+//		registry.addViewController("/login").setViewName(path.LOGIN);
 //	}
 //
 //}
