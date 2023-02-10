@@ -88,6 +88,8 @@ public class AddJournal {
             numberJournalSL.setTypeJournal("1");
         } else if (typeJ.equals("5 - из ОПД в РД")) {
             numberJournalSL.setTypeJournal("5");
+        } else if (typeJ.equals("4 - труп")) {
+            numberJournalSL.setTypeJournal("4");
         } else {
             numberJournalSL.setTypeJournal("2");
         }
