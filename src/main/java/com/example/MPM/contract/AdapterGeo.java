@@ -1,6 +1,7 @@
 package com.example.MPM.contract;
 
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,16 +45,13 @@ public class AdapterGeo {
     }
 
     public String geoString(Integer numberGeo) {//получение строки по номеру
-        if (numberGeo == null || numberGeo == 0 || numberGeo < 0) {
-            String geo = "Реквезит не заполнен";
-            return geo;
-        } else if (numberGeo > 0 && numberGeo < geoList.size()) {
-            String geo = geoList.get(numberGeo);
-            return geo;
+        String geo;
+        if (numberGeo >= 0 && numberGeo < geoList.size()) {
+            geo = geoList.get(numberGeo);
         } else {
-            String geo = "Реквезит не заполнен";
-            return geo;
+            geo = "Реквезит не заполнен";
         }
+        return geo;
     }
 
     public Integer geoInteger(String geo) { //получение номера по строке
