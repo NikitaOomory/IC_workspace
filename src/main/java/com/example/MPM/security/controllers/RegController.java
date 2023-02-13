@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 import java.util.Collections;
 
 @Controller
+@RequestMapping("/reg")
 public class RegController {
 
     @Autowired
@@ -25,12 +27,13 @@ public class RegController {
     @Autowired
     UserRepo userRepo;
 
-    @GetMapping("/reg")
-    public String getPage(Model model) {
+    @GetMapping
+    public String getRegistrationPage(Model model) {
         ArrayList<String> roles = new ArrayList<String>() {{
             add(Role.ADMIN.toString());
             add(Role.USER.toString());
         }};
+
         AdapterGeo adapterGeo = new AdapterGeo();
         Iterable<String> areas = adapterGeo.getGeoArrayList();
 
@@ -40,7 +43,7 @@ public class RegController {
         return path.REGISTRATION;
     }
 
-    @PostMapping("/reg")
+    @PostMapping
     public String saveNewUser(@RequestParam String username,
                               @RequestParam String password,
                               @RequestParam String nameEmployee,

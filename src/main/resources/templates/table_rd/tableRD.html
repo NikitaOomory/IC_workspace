@@ -4,12 +4,16 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/js/bootstrap.bundle.min.js">
+  <script src="/js/bootstrap.bundle.min.js"></script>
   <title>Взятие номера</title>
   <meta rel="author" content="Vasilev Nikita 314"/>
 </head>
 
 <body>
-
+<br>
+<br>
+<br>
 <!--блок навигации-->
 <div th:insert="blocks/navigation"></div>
 
@@ -22,9 +26,6 @@
 </div>
 
 
-<div align="center">
-  <a href="/tableRD/download" class="btn btn-primary">Документы для заполнения</a>
-</div>
 
 
 <div class="container py-5 h-100">
@@ -84,9 +85,7 @@
       <td th:text="${element.rozName}"></td>
       <td th:text="${element.dataSL}"></td>
       <td th:text="${element.dataIzm}"></td>
-      <td>
-      <a th:href="'/tableRD/' + ${element.id}" class="btn btn-outline-dark">подробнее</a>
-      </td>
+      <td><a th:href="'/tableRD/' + ${element.id}" class="btn btn-outline-dark">подробнее</a></td>
     </tr>
   </table>
 </div>
