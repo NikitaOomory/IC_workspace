@@ -164,7 +164,7 @@ public class User{
     }
 
     public String getFullName(){
-        return lastNameEmployee + nameEmployee + patronymicEmployee;
+        return lastNameEmployee + " " + nameEmployee + " " + patronymicEmployee;
     }
 
     public Set<Role> getRoles() {

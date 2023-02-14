@@ -2,6 +2,8 @@ package com.example.MPM.ser_table_rd.controllers;
 
 import com.example.MPM.contract.MyPagePath;
 import com.example.MPM.repo.JournalSLRepo;
+import com.example.MPM.repo.UserRepo;
+import com.example.MPM.security.model.UserUtils;
 import com.example.MPM.ser_table_rd.model.JournalSL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,10 @@ public class TableSearchCards {
     private MyPagePath path = new MyPagePath();
     @Autowired
     private JournalSLRepo journalSLRepo;
+    @Autowired
+    private UserUtils enteredUser;
+    @Autowired
+    UserRepo userRepo;
 
     @GetMapping("/table_rd/table_search_cards")
     public String getTableSearchCardsPage(Model model){
@@ -32,9 +38,13 @@ public class TableSearchCards {
 
     @GetMapping("/table_rd/table_search_cards/{id}")
     public String editCheckSearchCard(@PathVariable(value = "id") Long id){
-        JournalSL newJournal = journalSLRepo.findById(id).get();
-        newJournal.setCheckSearchCards(true);
-        journalSLRepo.save(newJournal);
+        enteredUser = new UserUtils(userRepo);
+        if(enteredUser.getAuthUserRole().equals("[ADMIN]")){
+            JournalSL newJournal = journalSLRepo.findById(id).get();
+            newJournal.setCheckSearchCards(true);
+            journalSLRepo.save(newJournal);
+
+        }
         return "redirect:/table_rd/table_search_cards";
     }
 }
