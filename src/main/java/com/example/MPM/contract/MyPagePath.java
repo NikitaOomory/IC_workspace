@@ -22,4 +22,5 @@ public class MyPagePath {
     public final String INFO_JOURNAL = "table_rd/info_journal";//страница отображения информации о РД
     public final String EDIT_JOURNAL = "table_rd/edit_journal";//страница редактирования РД
     public final String REG_DOCS = "table_rd/download_docs";//страница для скачивания документов
+    public final String SEARCH_CARDS = "table_rd/table_search_cards";//страница дел со счётчиками о сдачи розыскных карточек
 }

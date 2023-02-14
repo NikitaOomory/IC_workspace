@@ -104,6 +104,7 @@ public class AddJournal {
         JournalSL priorityNumberSL = journalSLRepository.findByOperName("");
 
         if (priorityNumberSL == null){
+            isSpecialCategoryThenSetFalseCheckedSearchCard(journalSL);
             journalSLRepository.save(journalSL);
         }else if (priorityNumberSL!= null) {
             priorityNumberSL.setOperName(oper_name);
@@ -114,10 +115,20 @@ public class AddJournal {
             priorityNumberSL.setPhoneNumberCreator(phone_oper);
             priorityNumberSL.setReadyDocks("X");
             priorityNumberSL.setDataIzm("внесено в свободный номер от которого отказались");
+            isSpecialCategoryThenSetFalseCheckedSearchCard(priorityNumberSL);
             journalSLRepository.save(priorityNumberSL);
         }
 
         return "redirect:/tableRD";
+    }
+
+    public boolean isSpecialCategoryThenSetFalseCheckedSearchCard(JournalSL journalSL){
+        if(journalSL.getNumberCat() >= 396 && journalSL.getNumberCat() <= 623){
+            journalSL.setCheckSearchCards(false);
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

@@ -44,21 +44,22 @@
             <a class="nav-link active" aria-current="page" href="/">Главная</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/tableRD">Таблица РД</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#">СУЗ</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Сверка</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tableRD">Таблица РД</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Иные сервисы
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Поддержка</a></li>
+              <li><a class="dropdown-item" href="/table_rd/table_search_cards">Таблица розыскных карточек</a></li>
               <li><a class="dropdown-item" href="/adm">Администрирование</a></li>
+              <li><a class="dropdown-item" href="#">Поддержка</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -68,7 +69,7 @@
         </ul>
         <div sec:authorize="isAuthenticated()">
           <form th:action="@{/logout}" method="post" class="me-3 py-2 text-dark text-decoration-none">
-            <button type="submit" value="Sign Out" class="btn btn-outline-danger">Выход</button>
+            <button type="submit" value="Sign Out" class="btn btn-danger">Выход</button>
           </form>
         </div>
       </div>

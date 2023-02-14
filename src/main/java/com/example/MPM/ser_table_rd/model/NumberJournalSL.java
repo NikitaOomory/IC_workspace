@@ -108,4 +108,5 @@ public class NumberJournalSL {
     public void setShortNumber(String shortNumber) {
         this.shortNumber = shortNumber;
     }
+
 }

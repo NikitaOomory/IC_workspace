@@ -24,6 +24,8 @@ public class JournalSL {
     private Integer numberCat,//номер категории дела
             numberGeo;//номер района
     private String editorIP;//ip адрес пользователя который последним осуществлял взаимодействие (создание, редактирование)
+    private boolean checkSearchCards;//отметка о сдаче розыскной карточки
+
 
     //Конструкторы
     //-------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +40,7 @@ public class JournalSL {
         this.phoneNumberCreator = phoneNumberCreator;
         this.dataIzm = "не изменялось";
         this.readyDocks = "X";
-
+        this.checkSearchCards = true;
     }
 
     public JournalSL() {
@@ -141,5 +143,13 @@ public class JournalSL {
 
     public void setPhoneNumberCreator(String phoneNumberCreator) {
         this.phoneNumberCreator = phoneNumberCreator;
+    }
+
+    public boolean isCheckSearchCards() {
+        return checkSearchCards;
+    }
+
+    public void setCheckSearchCards(boolean checkSearchCards) {
+        this.checkSearchCards = checkSearchCards;
     }
 }
