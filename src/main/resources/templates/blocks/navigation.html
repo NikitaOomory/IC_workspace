@@ -1,24 +1,78 @@
-<nav class="navbar navbar-light" style="background-color: rgba(0,108,248,0.11);"
-     xmlns:sec="http://www.w3.org/1999/xhtml">
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li class="m-md-2"><a href="/" class="nav-link px-2 link-secondary"><h5>IC_work_space</h5></a></li>
-        <li class="m-md-2"><a href="#" class="nav-link px-2 link-secondary">O платформе</a></li>
-        <li class="m-md-2"><a href="/tableRD" class="nav-link px-2 link-dark">Таблица РД</a></li>
-        <li class="m-md-2"><a href="/adm" class="nav-link px-2 link-dark">Админ</a></li>
-    </ul>
-
-
-
-    <div class="col-md-2 text-end">
-
-        Вы вошли как: <span sec:authentication="name"></span></div>
-
-        <div sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" method="post" class="me-3 py-2 text-dark text-decoration-none">
-                <button type="submit" value="Sign Out" class="btn btn-outline-primary">Авторизация</button>
-            </form>
+<nav class="navbar bg-body-tertiary fixed-top" style="background-color: #e3f2fd;" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <link href="/css/my_style.css">
+  <link href="/css/bootstrap.min.css"/>
+  <div class="container-fluid">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <div class="container text-center">
+            <div class="row">
+              <div class="col">
+                <a class="nav-link active" aria-current="page" href="/">IC workspace</a>
+              </div>
+              <div class="col">
+                <a class="nav-link active" aria-current="page" href="/tableRD">Таблица РД</a>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="col">
+
+        </div>
+        <div class="col" align="right" style="margin-right: 0; margin-left: 200px">
+          <a class="navbar-brand" href="#"><img src="/img/img_3.png" height="30px" width="30px"><span sec:authentication="name"></span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
 
 
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Меню</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">СУЗ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Сверка</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tableRD">Таблица РД</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Иные сервисы
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/table_rd/table_search_cards">Таблица розыскных карточек</a></li>
+              <li><a class="dropdown-item" href="/adm">Администрирование</a></li>
+              <li><a class="dropdown-item" href="#">Поддержка</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Настройки моего аккаунта</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div sec:authorize="isAuthenticated()">
+          <form th:action="@{/logout}" method="post" class="me-3 py-2 text-dark text-decoration-none">
+            <button type="submit" value="Sign Out" class="btn btn-danger">Выход</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>

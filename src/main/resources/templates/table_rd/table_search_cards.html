@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/bootstrap.bundle.min.js">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <title>Список</title>
+    <meta rel="author" content="Vasilev Nikita 314"/>
+</head>
+
+<body>
+<br>
+<br>
+<br>
+<!--блок навигации-->
+<div th:insert="blocks/navigation"></div>
+
+<div align="center">
+    <br>
+    <h1>Список</h1>
+    <br>
+</div>
+
+<form method="post">
+    <div class="container mt-5">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">№ дела</th>
+                <th scope="col">✅</th>
+                <th scope="col">ФИО сотрудника</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Срок предоставления</th>
+            </tr>
+            </thead>
+            <tr th:each="element : ${cards}">
+                <td th:text="${element.numberSL}"></td>
+                <td><a th:href="'/table_rd/table_search_cards/' + ${element.id}" class="btn btn-success">V</a></td>
+                <td th:text="${element.operName}"></td>
+                <td th:text="${element.dataSL}"></td>
+                <td>
+                    <p>60 суток с момента создания</p>
+                </td>
+                <td><a th:href="'/tableRD/' + ${element.id}" class="btn btn-outline-dark">подробнее</a></td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+</body>
+</html>

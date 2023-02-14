@@ -5,61 +5,63 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//Адаптер-словарь районов Псковской области
+/**
+ * Адаптер-словарь районов Псковской области
+ */
 @Component
 public class AdapterGeo {
 
-    private static ArrayList<String> geoList = new ArrayList<>();
+    private static ArrayList<String> geoArrayList = new ArrayList<>();
 
     static {
-        geoList.add("УМВД России по городу Пскову");
-        geoList.add("ОМВД России по городу Великие Луки");
-        geoList.add("МО МВД России «Бежаницкий»");
-        geoList.add("МО МВД России «Великолукский»");
-        geoList.add("ОМВД России по Гдовскому району");
-        geoList.add("МО МВД России «Дедовичский»");
-        geoList.add("ОП по Дновскому району");
-        geoList.add("ОП по Красногородскому району");
-        geoList.add("ОП по Куньинскому району");
-        geoList.add("ОП по Локнянскому району");
-        geoList.add("МО МВД России «Невельский»");
-        geoList.add("ОП по Новоржевскому району");
-        geoList.add("МО МВД России «Новосокольнический»");
-        geoList.add("МО МВД России «Опочецкий»");
-        geoList.add("ОМВД России по Островскому району");
-        geoList.add("ОП по Палкинскому району");
-        geoList.add("МО МВД России «Печорский»");
-        geoList.add("ОП по Плюсскому району");
-        geoList.add("ОМВД России по Порховскому району");
-        geoList.add("ОМВД России по Псковскому району");
-        geoList.add("ОП по Пустошкинскому району");
-        geoList.add("Отделение МВД России по Пушкиногорскому району");
-        geoList.add("Отделение МВД России по Пыталовскому району");
-        geoList.add("МО МВД России «Себежский»");
-        geoList.add("МО МВД России «Струго-Красненский»");
-        geoList.add("ПП по Усвятскому району");
+        geoArrayList.add("УМВД России по городу Пскову");
+        geoArrayList.add("ОМВД России по городу Великие Луки");
+        geoArrayList.add("МО МВД России «Бежаницкий»");
+        geoArrayList.add("МО МВД России «Великолукский»");
+        geoArrayList.add("ОМВД России по Гдовскому району");
+        geoArrayList.add("МО МВД России «Дедовичский»");
+        geoArrayList.add("ОП по Дновскому району");
+        geoArrayList.add("ОП по Красногородскому району");
+        geoArrayList.add("ОП по Куньинскому району");
+        geoArrayList.add("ОП по Локнянскому району");
+        geoArrayList.add("МО МВД России «Невельский»");
+        geoArrayList.add("ОП по Новоржевскому району");
+        geoArrayList.add("МО МВД России «Новосокольнический»");
+        geoArrayList.add("МО МВД России «Опочецкий»");
+        geoArrayList.add("ОМВД России по Островскому району");
+        geoArrayList.add("ОП по Палкинскому району");
+        geoArrayList.add("МО МВД России «Печорский»");
+        geoArrayList.add("ОП по Плюсскому району");
+        geoArrayList.add("ОМВД России по Порховскому району");
+        geoArrayList.add("ОМВД России по Псковскому району");
+        geoArrayList.add("ОП по Пустошкинскому району");
+        geoArrayList.add("Отделение МВД России по Пушкиногорскому району");
+        geoArrayList.add("Отделение МВД России по Пыталовскому району");
+        geoArrayList.add("МО МВД России «Себежский»");
+        geoArrayList.add("МО МВД России «Струго-Красненский»");
+        geoArrayList.add("ПП по Усвятскому району");
     }
 
     public AdapterGeo() {
 
     }
 
-    public String geoString(Integer numberGeo) {//получение строки по номеру
-        String geo;
-        if (numberGeo >= 0 && numberGeo < geoList.size()) {
-            geo = geoList.get(numberGeo);
+    public String getStringFromIntegerGeo(Integer numberGeo) {//получение строки по номеру
+        String result;
+        if (numberGeo >= 0 && numberGeo < geoArrayList.size()) {
+            result = geoArrayList.get(numberGeo);
         } else {
-            geo = "Реквезит не заполнен";
+            result = "Реквизит не заполнен";
         }
-        return geo;
+        return result;
     }
 
-    public Integer geoInteger(String geo) { //получение номера по строке
-        Integer numberGeo = geoList.indexOf(geo);
-        return numberGeo;
+    public Integer getIntegerFromStringGeo(String geo) { //получение номера по строке
+        Integer result = geoArrayList.indexOf(geo);
+        return result;
     }
 
-    public List<String> getGeoList() {
-        return geoList;
+    public List<String> getGeoArrayList() {
+        return geoArrayList;
     }
 }

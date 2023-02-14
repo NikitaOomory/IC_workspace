@@ -32,7 +32,7 @@ public class AddUserFromAdminPanel {
         }};
 
         AdapterGeo adapterGeo = new AdapterGeo();
-        Iterable<String> areas = adapterGeo.getGeoList();
+        Iterable<String> areas = adapterGeo.getGeoArrayList();
 
         model.addAttribute("area", areas);
         model.addAttribute("roles", roles);

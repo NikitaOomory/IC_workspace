@@ -23,7 +23,7 @@ public class InitializationSettings {
         ArrayList<AdminSetting> settingsArray = new ArrayList<AdminSetting>() {{ //список настроек для инициализации
             add(new AdminSetting("User ability to add a journal", true,
                     null, null, "Таблица РД",
-                    "Настройка отключающая кнопку добавления дела в таблицу только для пользователя, но не для администратора"));
+                    "Активность кнопки добавления номера РД для USER"));
         }};
 
         for (AdminSetting setting : settingsArray) {//цикл инициализации настроек

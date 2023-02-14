@@ -1,6 +1,6 @@
 package com.example.MPM.ser_table_rd.controllers;
 
-import com.example.MPM.contract.AdapterCat;
+import com.example.MPM.contract.AdapterCategory;
 import com.example.MPM.contract.AdapterGeo;
 import com.example.MPM.contract.MyPagePath;
 import com.example.MPM.repo.JournalSLRepo;
@@ -39,10 +39,10 @@ public class InfoFormTableRD {
         Optional<JournalSL> jurnalSL = journalSLRepository.findById(id);
         ArrayList<JournalSL> res = new ArrayList<>();
         jurnalSL.ifPresent(res::add);
-        AdapterCat adapterCat = new AdapterCat();
+        AdapterCategory adapterCat = new AdapterCategory();
         AdapterGeo adapterGeo = new AdapterGeo();
-        String geo = adapterGeo.geoString(jurnalSL.get().getNumberGeo());
-        String cat = adapterCat.catString(jurnalSL.get().getNumberCat());
+        String geo = adapterGeo.getStringFromIntegerGeo(jurnalSL.get().getNumberGeo());
+        String cat = adapterCat.getStringCategoryFromInteger(jurnalSL.get().getNumberCat());
         final ArrayList<String> check = new ArrayList<String>() {{
             add("есть");
             add("отсутствуют");
